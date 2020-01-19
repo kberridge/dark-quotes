@@ -6,7 +6,7 @@
     "start": "bsb -make-world -w",
     "clean": "bsb -clean-world",
     "webpack": "webpack -w",
-    "webpack:production": "NODE_ENV=production webpack",
+    "webpack:production": "set NODE_ENV=production&& set PUBLIC_PATH=DARK_STATIC_ASSETS_BASE_URL&& webpack",
     "server": "webpack-dev-server"
   },
   "keywords": [

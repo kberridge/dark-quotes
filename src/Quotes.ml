@@ -180,7 +180,7 @@ let viewNewQuoteForm model =
       ; div 
           [ style "border" "1px solid black"
           ; style "padding" "1em"
-          ; style "width" "40em"
+          ; style "width" "20em"
           ]
           [ if List.length model.addQuoteErrors > 0 then
               viewErrorDisplayList model.addQuoteErrors
@@ -229,6 +229,26 @@ let view (model : model) =
       | None -> noNode
       end
     ; viewNewQuoteForm model
+    ; div
+        [ style "display" "flex"
+        ; style "justify-content" "center"
+        ; style "padding-top" "2em"
+        ]
+        [ p []
+          [ text "Built by "
+          ; a [ href "https://www.kevinberridge.com"; target "_blank" ] [ text "Kevin Berridge" ]
+          ; text " "
+          ; a [ href "http://twitter.com/kberridge"; target "_blank" ] [ text "(@kberridge)"]
+          ; text " in "
+          ; a [ href "http://darklang.com"; target "_blank" ] [ text "Dark" ]
+          ; text " and "
+          ; a [ href "https://bucklescript.github.io/docs/en/stdlib-overview"; target "_blank" ] [ text "BuckleScript" ]
+          ; text " and "
+          ; a [ href "https://github.com/OvermindDL1/bucklescript-tea"; target "_blank" ] [ text "BuckleScript-TEA" ]
+          ; text " "
+          ; a [ href "https://github.com/kberridge/dark-quotes"; target "_blank" ] [text "(github)" ]
+          ] 
+        ]
     ]
 
 let main =

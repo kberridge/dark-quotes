@@ -396,7 +396,7 @@ function viewNewQuoteForm(model) {
                             /* :: */[
                               Tea_html.style("padding", "1em"),
                               /* :: */[
-                                Tea_html.style("width", "40em"),
+                                Tea_html.style("width", "20em"),
                                 /* [] */0
                               ]
                             ]
@@ -546,7 +546,112 @@ function view(model) {
                         ]) : Tea_html.noNode,
                   /* :: */[
                     viewNewQuoteForm(model),
-                    /* [] */0
+                    /* :: */[
+                      Tea_html.div(undefined, undefined, /* :: */[
+                            Tea_html.style("display", "flex"),
+                            /* :: */[
+                              Tea_html.style("justify-content", "center"),
+                              /* :: */[
+                                Tea_html.style("padding-top", "2em"),
+                                /* [] */0
+                              ]
+                            ]
+                          ], /* :: */[
+                            Tea_html.p(undefined, undefined, /* [] */0, /* :: */[
+                                  Tea_html.text("Built by "),
+                                  /* :: */[
+                                    Tea_html.a(undefined, undefined, /* :: */[
+                                          Tea_html.href("https://www.kevinberridge.com"),
+                                          /* :: */[
+                                            Tea_html.target("_blank"),
+                                            /* [] */0
+                                          ]
+                                        ], /* :: */[
+                                          Tea_html.text("Kevin Berridge"),
+                                          /* [] */0
+                                        ]),
+                                    /* :: */[
+                                      Tea_html.text(" "),
+                                      /* :: */[
+                                        Tea_html.a(undefined, undefined, /* :: */[
+                                              Tea_html.href("http://twitter.com/kberridge"),
+                                              /* :: */[
+                                                Tea_html.target("_blank"),
+                                                /* [] */0
+                                              ]
+                                            ], /* :: */[
+                                              Tea_html.text("(@kberridge)"),
+                                              /* [] */0
+                                            ]),
+                                        /* :: */[
+                                          Tea_html.text(" in "),
+                                          /* :: */[
+                                            Tea_html.a(undefined, undefined, /* :: */[
+                                                  Tea_html.href("http://darklang.com"),
+                                                  /* :: */[
+                                                    Tea_html.target("_blank"),
+                                                    /* [] */0
+                                                  ]
+                                                ], /* :: */[
+                                                  Tea_html.text("Dark"),
+                                                  /* [] */0
+                                                ]),
+                                            /* :: */[
+                                              Tea_html.text(" and "),
+                                              /* :: */[
+                                                Tea_html.a(undefined, undefined, /* :: */[
+                                                      Tea_html.href("https://bucklescript.github.io/docs/en/stdlib-overview"),
+                                                      /* :: */[
+                                                        Tea_html.target("_blank"),
+                                                        /* [] */0
+                                                      ]
+                                                    ], /* :: */[
+                                                      Tea_html.text("BuckleScript"),
+                                                      /* [] */0
+                                                    ]),
+                                                /* :: */[
+                                                  Tea_html.text(" and "),
+                                                  /* :: */[
+                                                    Tea_html.a(undefined, undefined, /* :: */[
+                                                          Tea_html.href("https://github.com/OvermindDL1/bucklescript-tea"),
+                                                          /* :: */[
+                                                            Tea_html.target("_blank"),
+                                                            /* [] */0
+                                                          ]
+                                                        ], /* :: */[
+                                                          Tea_html.text("BuckleScript-TEA"),
+                                                          /* [] */0
+                                                        ]),
+                                                    /* :: */[
+                                                      Tea_html.text(" "),
+                                                      /* :: */[
+                                                        Tea_html.a(undefined, undefined, /* :: */[
+                                                              Tea_html.href("https://github.com/kberridge/dark-quotes"),
+                                                              /* :: */[
+                                                                Tea_html.target("_blank"),
+                                                                /* [] */0
+                                                              ]
+                                                            ], /* :: */[
+                                                              Tea_html.text("(github)"),
+                                                              /* [] */0
+                                                            ]),
+                                                        /* [] */0
+                                                      ]
+                                                    ]
+                                                  ]
+                                                ]
+                                              ]
+                                            ]
+                                          ]
+                                        ]
+                                      ]
+                                    ]
+                                  ]
+                                ]),
+                            /* [] */0
+                          ]),
+                      /* [] */0
+                    ]
                   ]
                 ]
               ]
