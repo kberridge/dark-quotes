@@ -1,4 +1,4 @@
-# Basic Reason Template
+# Quotes!  In Dark!
 
 A random quote front end over a DarkLang backend, just so I can screw around with DarkLang.
 
