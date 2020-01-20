@@ -12,6 +12,8 @@ type quote = {
 type addQuote = {
   quote: string;
   attribution: string;
+  username: string;
+  password: string;
 }
 
 type error = {
@@ -29,7 +31,6 @@ type model = {
   currentQuote: quote option;
   failed: bool;
   addQuote: addQuote;
-  addFailed: bool;
   addQuotePending: bool;
   addQuoteErrors: error list;
 }
@@ -46,6 +47,8 @@ type msg =
   | GetDifferentQuote
   | SetQuote of string
   | SetAttribution of string
+  | SetUsername of string
+  | SetPassword of string
   | PostQuote
   | GotPostQuoteResponse of (string, string Http.error) Result.t
   [@@bs.deriving {accessors}]
@@ -55,6 +58,8 @@ let apiPostQuote (addQuote : addQuote) =
   let body = object_
     [ "quote", string addQuote.quote
     ; "attribution", string addQuote.attribution
+    ; "username", string addQuote.username
+    ; "password", string addQuote.password
     ] 
     |> encode 0
   in
@@ -76,8 +81,9 @@ let init() =
      addQuote = {
        quote = "";
        attribution = "";
+       username = "";
+       password = "";
      };
-     addFailed = false;
      addQuotePending = false;
      addQuoteErrors = []
     }
@@ -114,8 +120,10 @@ let update (model : model) = function
     )
   | SetQuote q -> {model with addQuote = {model.addQuote with quote = q}}, Cmd.none
   | SetAttribution a -> {model with addQuote = {model.addQuote with attribution = a}}, Cmd.none
+  | SetUsername a -> {model with addQuote = {model.addQuote with username = a}}, Cmd.none
+  | SetPassword a -> {model with addQuote = {model.addQuote with password = a}}, Cmd.none
   | PostQuote -> {model with addQuotePending = true}, apiPostQuote model.addQuote
-  | GotPostQuoteResponse (Error _e) -> {model with addFailed = true; addQuotePending = false}, Cmd.none
+  | GotPostQuoteResponse (Error _e) -> {model with failed = true; addQuotePending = false}, Cmd.none
   | GotPostQuoteResponse (Ok data) -> 
     let open Json.Decoder in
     let response_decoder = Json.Decoder.map3 (fun a b c -> { success = a; quote = b; errors = c })
@@ -129,12 +137,11 @@ let update (model : model) = function
       begin if response.success then
         match response.quote with
         | Some quote -> 
-          { model with 
-            currentQuote = Some quote; 
-            failed = false; 
-            addQuote = { quote = ""; attribution = "" }; 
-            addQuotePending = false; 
-            addQuoteErrors = []
+          { currentQuote = Some quote
+          ;  failed = false
+          ;  addQuote = { model.addQuote with quote = ""; attribution = ""; }
+          ;  addQuotePending = false
+          ;  addQuoteErrors = []
           }, Cmd.none
         | None ->
           { model with failed = true; addQuotePending = false }, Cmd.none
@@ -190,6 +197,10 @@ let viewNewQuoteForm model =
           ; textarea [ name "quote"; style "width" "100%"; onChange setQuote; value model.addQuote.quote ] [ ]
           ; label [ for' "attribution"; style "display" "block" ] [ text "Attribution" ]
           ; input' [ name "attribution"; style "width" "100%"; onChange setAttribution; value model.addQuote.attribution ] [ ]
+          ; label [ for' "username"; style "display" "block" ] [ text "Username" ]
+          ; input' [ name "username"; style "width" "100%"; onChange setUsername; value model.addQuote.username ] [ ]
+          ; label [ for' "password"; style "display" "block" ] [ text "Password" ]
+          ; input' [ Tea.Html.type' "password"; name "password"; style "width" "100%"; onChange setPassword; value model.addQuote.password ] [ ]
           ; button [ onClick PostQuote; style "margin-top" "1em"; Attributes.disabled model.addQuotePending ] [ text "Add Quote" ]
           ]
       ]

@@ -53,8 +53,16 @@ function setAttribution(param_0) {
   return /* SetAttribution */Block.__(2, [param_0]);
 }
 
+function setUsername(param_0) {
+  return /* SetUsername */Block.__(3, [param_0]);
+}
+
+function setPassword(param_0) {
+  return /* SetPassword */Block.__(4, [param_0]);
+}
+
 function gotPostQuoteResponse(param_0) {
-  return /* GotPostQuoteResponse */Block.__(3, [param_0]);
+  return /* GotPostQuoteResponse */Block.__(5, [param_0]);
 }
 
 function apiPostQuote(addQuote) {
@@ -68,7 +76,19 @@ function apiPostQuote(addQuote) {
                 "attribution",
                 Tea_json.Encoder[/* string */1](addQuote[/* attribution */1])
               ],
-              /* [] */0
+              /* :: */[
+                /* tuple */[
+                  "username",
+                  Tea_json.Encoder[/* string */1](addQuote[/* username */2])
+                ],
+                /* :: */[
+                  /* tuple */[
+                    "password",
+                    Tea_json.Encoder[/* string */1](addQuote[/* password */3])
+                  ],
+                  /* [] */0
+                ]
+              ]
             ]
           ]));
   return Tea_http.send(gotPostQuoteResponse, Tea_http.request(/* record */[
@@ -95,9 +115,10 @@ function init(param) {
             /* failed */false,
             /* addQuote : record */[
               /* quote */"",
-              /* attribution */""
+              /* attribution */"",
+              /* username */"",
+              /* password */""
             ],
-            /* addFailed */false,
             /* addQuotePending */false,
             /* addQuoteErrors : [] */0
           ],
@@ -129,18 +150,16 @@ function updateCurrentQuoteFromJson(model, data) {
             /* currentQuote */undefined,
             /* failed */true,
             /* addQuote */model[/* addQuote */2],
-            /* addFailed */model[/* addFailed */3],
-            /* addQuotePending */model[/* addQuotePending */4],
-            /* addQuoteErrors */model[/* addQuoteErrors */5]
+            /* addQuotePending */model[/* addQuotePending */3],
+            /* addQuoteErrors */model[/* addQuoteErrors */4]
           ];
   } else {
     return /* record */[
             /* currentQuote */match[0],
             /* failed */false,
             /* addQuote */model[/* addQuote */2],
-            /* addFailed */model[/* addFailed */3],
-            /* addQuotePending */model[/* addQuotePending */4],
-            /* addQuoteErrors */model[/* addQuoteErrors */5]
+            /* addQuotePending */model[/* addQuotePending */3],
+            /* addQuoteErrors */model[/* addQuoteErrors */4]
           ];
   }
 }
@@ -158,9 +177,8 @@ function update(model, param) {
                 /* currentQuote */model[/* currentQuote */0],
                 /* failed */model[/* failed */1],
                 /* addQuote */model[/* addQuote */2],
-                /* addFailed */model[/* addFailed */3],
                 /* addQuotePending */true,
-                /* addQuoteErrors */model[/* addQuoteErrors */5]
+                /* addQuoteErrors */model[/* addQuoteErrors */4]
               ],
               apiPostQuote(model[/* addQuote */2])
             ];
@@ -175,9 +193,8 @@ function update(model, param) {
                       /* currentQuote */undefined,
                       /* failed */true,
                       /* addQuote */model[/* addQuote */2],
-                      /* addFailed */model[/* addFailed */3],
-                      /* addQuotePending */model[/* addQuotePending */4],
-                      /* addQuoteErrors */model[/* addQuoteErrors */5]
+                      /* addQuotePending */model[/* addQuotePending */3],
+                      /* addQuoteErrors */model[/* addQuoteErrors */4]
                     ],
                     Tea_cmd.none
                   ];
@@ -195,11 +212,12 @@ function update(model, param) {
                     /* failed */model[/* failed */1],
                     /* addQuote : record */[
                       /* quote */param[0],
-                      /* attribution */init[/* attribution */1]
+                      /* attribution */init[/* attribution */1],
+                      /* username */init[/* username */2],
+                      /* password */init[/* password */3]
                     ],
-                    /* addFailed */model[/* addFailed */3],
-                    /* addQuotePending */model[/* addQuotePending */4],
-                    /* addQuoteErrors */model[/* addQuoteErrors */5]
+                    /* addQuotePending */model[/* addQuotePending */3],
+                    /* addQuoteErrors */model[/* addQuoteErrors */4]
                   ],
                   Tea_cmd.none
                 ];
@@ -211,25 +229,59 @@ function update(model, param) {
                     /* failed */model[/* failed */1],
                     /* addQuote : record */[
                       /* quote */init$1[/* quote */0],
-                      /* attribution */param[0]
+                      /* attribution */param[0],
+                      /* username */init$1[/* username */2],
+                      /* password */init$1[/* password */3]
                     ],
-                    /* addFailed */model[/* addFailed */3],
-                    /* addQuotePending */model[/* addQuotePending */4],
-                    /* addQuoteErrors */model[/* addQuoteErrors */5]
+                    /* addQuotePending */model[/* addQuotePending */3],
+                    /* addQuoteErrors */model[/* addQuoteErrors */4]
                   ],
                   Tea_cmd.none
                 ];
       case 3 : 
+          var init$2 = model[/* addQuote */2];
+          return /* tuple */[
+                  /* record */[
+                    /* currentQuote */model[/* currentQuote */0],
+                    /* failed */model[/* failed */1],
+                    /* addQuote : record */[
+                      /* quote */init$2[/* quote */0],
+                      /* attribution */init$2[/* attribution */1],
+                      /* username */param[0],
+                      /* password */init$2[/* password */3]
+                    ],
+                    /* addQuotePending */model[/* addQuotePending */3],
+                    /* addQuoteErrors */model[/* addQuoteErrors */4]
+                  ],
+                  Tea_cmd.none
+                ];
+      case 4 : 
+          var init$3 = model[/* addQuote */2];
+          return /* tuple */[
+                  /* record */[
+                    /* currentQuote */model[/* currentQuote */0],
+                    /* failed */model[/* failed */1],
+                    /* addQuote : record */[
+                      /* quote */init$3[/* quote */0],
+                      /* attribution */init$3[/* attribution */1],
+                      /* username */init$3[/* username */2],
+                      /* password */param[0]
+                    ],
+                    /* addQuotePending */model[/* addQuotePending */3],
+                    /* addQuoteErrors */model[/* addQuoteErrors */4]
+                  ],
+                  Tea_cmd.none
+                ];
+      case 5 : 
           var match$1 = param[0];
           if (match$1.tag) {
             return /* tuple */[
                     /* record */[
                       /* currentQuote */model[/* currentQuote */0],
-                      /* failed */model[/* failed */1],
+                      /* failed */true,
                       /* addQuote */model[/* addQuote */2],
-                      /* addFailed */true,
                       /* addQuotePending */false,
-                      /* addQuoteErrors */model[/* addQuoteErrors */5]
+                      /* addQuoteErrors */model[/* addQuoteErrors */4]
                     ],
                     Tea_cmd.none
                   ];
@@ -248,9 +300,8 @@ function update(model, param) {
                         /* currentQuote */model[/* currentQuote */0],
                         /* failed */true,
                         /* addQuote */model[/* addQuote */2],
-                        /* addFailed */model[/* addFailed */3],
                         /* addQuotePending */false,
-                        /* addQuoteErrors */model[/* addQuoteErrors */5]
+                        /* addQuoteErrors */model[/* addQuoteErrors */4]
                       ],
                       Tea_cmd.none
                     ];
@@ -259,15 +310,17 @@ function update(model, param) {
               if (response[/* success */0]) {
                 var match$2 = response[/* quote */1];
                 if (match$2 !== undefined) {
+                  var init$4 = model[/* addQuote */2];
                   return /* tuple */[
                           /* record */[
                             /* currentQuote */match$2,
                             /* failed */false,
                             /* addQuote : record */[
                               /* quote */"",
-                              /* attribution */""
+                              /* attribution */"",
+                              /* username */init$4[/* username */2],
+                              /* password */init$4[/* password */3]
                             ],
-                            /* addFailed */model[/* addFailed */3],
                             /* addQuotePending */false,
                             /* addQuoteErrors : [] */0
                           ],
@@ -279,9 +332,8 @@ function update(model, param) {
                             /* currentQuote */model[/* currentQuote */0],
                             /* failed */true,
                             /* addQuote */model[/* addQuote */2],
-                            /* addFailed */model[/* addFailed */3],
                             /* addQuotePending */false,
-                            /* addQuoteErrors */model[/* addQuoteErrors */5]
+                            /* addQuoteErrors */model[/* addQuoteErrors */4]
                           ],
                           Tea_cmd.none
                         ];
@@ -294,7 +346,6 @@ function update(model, param) {
                             /* currentQuote */model[/* currentQuote */0],
                             /* failed */model[/* failed */1],
                             /* addQuote */model[/* addQuote */2],
-                            /* addFailed */model[/* addFailed */3],
                             /* addQuotePending */false,
                             /* addQuoteErrors */match$3
                           ],
@@ -306,9 +357,8 @@ function update(model, param) {
                             /* currentQuote */model[/* currentQuote */0],
                             /* failed */true,
                             /* addQuote */model[/* addQuote */2],
-                            /* addFailed */model[/* addFailed */3],
                             /* addQuotePending */false,
-                            /* addQuoteErrors */model[/* addQuoteErrors */5]
+                            /* addQuoteErrors */model[/* addQuoteErrors */4]
                           ],
                           Tea_cmd.none
                         ];
@@ -401,7 +451,7 @@ function viewNewQuoteForm(model) {
                               ]
                             ]
                           ], /* :: */[
-                            List.length(model[/* addQuoteErrors */5]) > 0 ? viewErrorDisplayList(model[/* addQuoteErrors */5]) : Tea_html.noNode,
+                            List.length(model[/* addQuoteErrors */4]) > 0 ? viewErrorDisplayList(model[/* addQuoteErrors */4]) : Tea_html.noNode,
                             /* :: */[
                               Tea_html.label(undefined, undefined, /* :: */[
                                     Tea_html.for$prime("quote"),
@@ -453,20 +503,77 @@ function viewNewQuoteForm(model) {
                                           ]
                                         ], /* [] */0),
                                     /* :: */[
-                                      Tea_html.button(undefined, undefined, /* :: */[
-                                            Tea_html.onClick(/* PostQuote */1),
+                                      Tea_html.label(undefined, undefined, /* :: */[
+                                            Tea_html.for$prime("username"),
                                             /* :: */[
-                                              Tea_html.style("margin-top", "1em"),
-                                              /* :: */[
-                                                Tea_html.Attributes[/* disabled */3](model[/* addQuotePending */4]),
-                                                /* [] */0
-                                              ]
+                                              Tea_html.style("display", "block"),
+                                              /* [] */0
                                             ]
                                           ], /* :: */[
-                                            Tea_html.text("Add Quote"),
+                                            Tea_html.text("Username"),
                                             /* [] */0
                                           ]),
-                                      /* [] */0
+                                      /* :: */[
+                                        Tea_html.input$prime(undefined, undefined, /* :: */[
+                                              Tea_html.name("username"),
+                                              /* :: */[
+                                                Tea_html.style("width", "100%"),
+                                                /* :: */[
+                                                  Tea_html.onChange(undefined, setUsername),
+                                                  /* :: */[
+                                                    Tea_html.value(model[/* addQuote */2][/* username */2]),
+                                                    /* [] */0
+                                                  ]
+                                                ]
+                                              ]
+                                            ], /* [] */0),
+                                        /* :: */[
+                                          Tea_html.label(undefined, undefined, /* :: */[
+                                                Tea_html.for$prime("password"),
+                                                /* :: */[
+                                                  Tea_html.style("display", "block"),
+                                                  /* [] */0
+                                                ]
+                                              ], /* :: */[
+                                                Tea_html.text("Password"),
+                                                /* [] */0
+                                              ]),
+                                          /* :: */[
+                                            Tea_html.input$prime(undefined, undefined, /* :: */[
+                                                  Tea_html.type$prime("password"),
+                                                  /* :: */[
+                                                    Tea_html.name("password"),
+                                                    /* :: */[
+                                                      Tea_html.style("width", "100%"),
+                                                      /* :: */[
+                                                        Tea_html.onChange(undefined, setPassword),
+                                                        /* :: */[
+                                                          Tea_html.value(model[/* addQuote */2][/* password */3]),
+                                                          /* [] */0
+                                                        ]
+                                                      ]
+                                                    ]
+                                                  ]
+                                                ], /* [] */0),
+                                            /* :: */[
+                                              Tea_html.button(undefined, undefined, /* :: */[
+                                                    Tea_html.onClick(/* PostQuote */1),
+                                                    /* :: */[
+                                                      Tea_html.style("margin-top", "1em"),
+                                                      /* :: */[
+                                                        Tea_html.Attributes[/* disabled */3](model[/* addQuotePending */3]),
+                                                        /* [] */0
+                                                      ]
+                                                    ]
+                                                  ], /* :: */[
+                                                    Tea_html.text("Add Quote"),
+                                                    /* [] */0
+                                                  ]),
+                                              /* [] */0
+                                            ]
+                                          ]
+                                        ]
+                                      ]
                                     ]
                                   ]
                                 ]
@@ -684,6 +791,8 @@ exports.gotQuoteResponse = gotQuoteResponse;
 exports.getDifferentQuote = getDifferentQuote;
 exports.setQuote = setQuote;
 exports.setAttribution = setAttribution;
+exports.setUsername = setUsername;
+exports.setPassword = setPassword;
 exports.postQuote = postQuote;
 exports.gotPostQuoteResponse = gotPostQuoteResponse;
 exports.apiPostQuote = apiPostQuote;
