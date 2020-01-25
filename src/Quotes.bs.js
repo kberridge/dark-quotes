@@ -373,27 +373,52 @@ function update(model, param) {
 
 function viewQuote(quote) {
   var match = quote[/* attribution */1];
-  return Tea_html.div(undefined, undefined, /* [] */0, /* :: */[
-              Tea_html.div(undefined, undefined, /* [] */0, /* :: */[
-                    Tea_html.text(quote[/* quote */0]),
-                    /* [] */0
-                  ]),
+  var tmp;
+  if (match !== undefined) {
+    var attribution = match;
+    tmp = attribution.length !== 0 ? Tea_html.div(undefined, undefined, /* :: */[
+            Tea_html.style("padding-left", "2em"),
+            /* [] */0
+          ], /* :: */[
+            Tea_html.text($$String.concat("", /* :: */[
+                      "-",
+                      /* :: */[
+                        attribution,
+                        /* [] */0
+                      ]
+                    ])),
+            /* [] */0
+          ]) : Tea_html.noNode;
+  } else {
+    tmp = Tea_html.noNode;
+  }
+  return Tea_html.div(undefined, undefined, /* :: */[
+              Tea_html.style("width", "50%"),
               /* :: */[
-                match !== undefined ? Tea_html.div(undefined, undefined, /* :: */[
-                        Tea_html.style("padding-left", "2em"),
-                        /* [] */0
-                      ], /* :: */[
-                        Tea_html.text($$String.concat("", /* :: */[
-                                  "-",
-                                  /* :: */[
-                                    match,
-                                    /* [] */0
-                                  ]
-                                ])),
-                        /* [] */0
-                      ]) : Tea_html.noNode,
+                Tea_html.style("min-width", "30em"),
                 /* [] */0
               ]
+            ], /* :: */[
+              Tea_html.div(undefined, undefined, /* :: */[
+                    Tea_html.style("display", "flex"),
+                    /* :: */[
+                      Tea_html.style("justify-content", "center"),
+                      /* [] */0
+                    ]
+                  ], /* :: */[
+                    Tea_html.div(undefined, undefined, /* [] */0, /* :: */[
+                          Tea_html.div(undefined, undefined, /* [] */0, /* :: */[
+                                Tea_html.text(quote[/* quote */0]),
+                                /* [] */0
+                              ]),
+                          /* :: */[
+                            tmp,
+                            /* [] */0
+                          ]
+                        ]),
+                    /* [] */0
+                  ]),
+              /* [] */0
             ]);
 }
 

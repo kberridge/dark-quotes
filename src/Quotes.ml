@@ -154,16 +154,27 @@ let update (model : model) = function
 
 let viewQuote (quote: quote) =
   div
-    []
+    [ style "width" "50%"; style "min-width" "30em" ]
     [ div
-      []
-      [ text quote.quote ]
-    ; match quote.attribution with
-      | Some attribution ->
-        div
-        [ style "padding-left" "2em" ]
-        [ text (String.concat "" ["-"; attribution]) ]
-      | None -> noNode
+      [ style "display" "flex"
+      ; style "justify-content" "center"
+      ]
+      [ div
+        []
+        [ div
+          []
+          [ text quote.quote ]
+        ; match quote.attribution with
+          | Some attribution ->
+            if String.length attribution > 0 then
+              div
+              [ style "padding-left" "2em" ]
+              [ text (String.concat "" ["-"; attribution]) ]
+            else
+              noNode
+          | None -> noNode
+        ]
+      ]
     ]
 
 let viewErrorDisplayList (errors : error list) =
